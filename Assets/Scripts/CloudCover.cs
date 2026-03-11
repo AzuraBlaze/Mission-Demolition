@@ -29,7 +29,12 @@ public class CloudCover : MonoBehaviour
             int spriteNum = Random.Range(0, cloudSprites.Length);
             sRend.sprite = cloudSprites[spriteNum];
 
-            cloudTrans.position = RandomPos();
+            cloudTrans.position = new Vector3()
+            {
+                x = Random.Range(minPos.x, maxPos.x),
+                y = Random.Range(minPos.y, maxPos.y),
+                z = Random.Range(minPos.z, maxPos.z)
+            };
             cloudTrans.SetParent(parentTrans, true);
 
             scaleMult = Random.Range(scaleRange.x, scaleRange.y);
@@ -37,13 +42,13 @@ public class CloudCover : MonoBehaviour
         }
     }
 
-    Vector3 RandomPos()
-    {
-        return new Vector3()
-        {
-            x = Random.Range(minPos.x, maxPos.x),
-            y = Random.Range(minPos.y, maxPos.y),
-            z = Random.Range(minPos.z, maxPos.z)
-        };
-    }
+    // Vector3 RandomPos()
+    // {
+    //     return new Vector3()
+    //     {
+    //         x = Random.Range(minPos.x, maxPos.x),
+    //         y = Random.Range(minPos.y, maxPos.y),
+    //         z = Random.Range(minPos.z, maxPos.z)
+    //     };
+    // }
 }
