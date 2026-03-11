@@ -3,12 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum GameMode
-{
-    idle,
-    playing,
-    levelEnd
-}
+public enum GameMode { idle, playing, levelEnd }
 
 public class MissionDemolition : MonoBehaviour
 {
@@ -55,6 +50,8 @@ public class MissionDemolition : MonoBehaviour
         UpdateGUI();
 
         mode = GameMode.playing;
+
+        FollowCam.SWITCH_VIEW(FollowCam.eView.both);
     }
 
     void UpdateGUI()
@@ -70,6 +67,7 @@ public class MissionDemolition : MonoBehaviour
         if ((mode == GameMode.playing) && Goal.goalMet)
         {
             mode = GameMode.levelEnd;
+            FollowCam.SWITCH_VIEW(FollowCam.eView.both);
             Invoke("NextLevel", 2f);
         }
     }
