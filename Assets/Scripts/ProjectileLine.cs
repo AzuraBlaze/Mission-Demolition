@@ -37,6 +37,11 @@ public class ProjectileLine : MonoBehaviour
         }
     }
 
+    void OnDestroy()
+    {
+        PROJ_LINES.Remove(this);
+    }
+
     static void ADD_LINE(ProjectileLine newLine)
     {
         Color color;
