@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class Slingshot : MonoBehaviour
 {
     [Header("Inscribed")]
@@ -11,14 +12,14 @@ public class Slingshot : MonoBehaviour
     public LineRenderer rubberBand;
     public Transform leftFork;
     public Transform rightFork;
-    // public AudioClip snapSound;
+    public AudioClip snapSound;
 
     [Header("Dynamic")]
     public GameObject launchPoint;
     public Vector3 launchPos;
     public GameObject projectile;
     public bool aimingMode;
-    // private AudioSource audioSource;
+    private AudioSource audioSource;
 
     void Awake()
     {
@@ -30,7 +31,7 @@ public class Slingshot : MonoBehaviour
         if (rubberBand != null)
             rubberBand.enabled = false;
         
-        // audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void OnMouseEnter()
@@ -91,7 +92,8 @@ public class Slingshot : MonoBehaviour
             if (rubberBand != null)
                 rubberBand.enabled = false;
             
-            // audioSource.PlayOneShot(snapSound);
+            if (snapSound != null)
+                audioSource.PlayOneShot(snapSound);
             
             Rigidbody projRB = projectile.GetComponent<Rigidbody>();
             projRB.isKinematic = false;
