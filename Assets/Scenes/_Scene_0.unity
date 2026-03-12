@@ -1500,6 +1500,7 @@ MonoBehaviour:
   - {fileID: 3930385434910424856, guid: ea7d09f2ab09b2d958214de6b191f5d8, type: 3}
   - {fileID: 3930385434910424856, guid: ecbc4f2d8905a280a8b0212862d44cbe, type: 3}
   gameOverPanel: {fileID: 1498690694}
+  winPanel: {fileID: 1470072916}
   shotsMax: 5
   level: 0
   levelMax: 0
