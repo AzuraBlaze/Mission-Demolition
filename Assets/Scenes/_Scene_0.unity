@@ -315,7 +315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7254902, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.9433962, g: 0.12014952, b: 0.12014952, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1491,6 +1491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75c650929ef1bb53fb37a133dd5418c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shotsMax: 5
   uitLevel: {fileID: 1390381686}
   uitShots: {fileID: 1588587532}
   castlePos: {x: 50, y: -9.5, z: 0}
@@ -1501,7 +1502,6 @@ MonoBehaviour:
   - {fileID: 3930385434910424856, guid: ecbc4f2d8905a280a8b0212862d44cbe, type: 3}
   gameOverPanel: {fileID: 1498690694}
   winPanel: {fileID: 1470072916}
-  shotsMax: 5
   level: 0
   levelMax: 0
   shotsTaken: 0
