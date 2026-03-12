@@ -1365,6 +1365,7 @@ MonoBehaviour:
   - {fileID: 3930385434910424856, guid: ea7d09f2ab09b2d958214de6b191f5d8, type: 3}
   - {fileID: 3930385434910424856, guid: ecbc4f2d8905a280a8b0212862d44cbe, type: 3}
   gameOverPanel: {fileID: 1498690694}
+  shotsMax: 5
   level: 0
   levelMax: 0
   shotsTaken: 0
@@ -1836,7 +1837,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -10, y: -10}
-  m_SizeDelta: {x: 256, y: 32}
+  m_SizeDelta: {x: 320, y: 32}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1588587532
 MonoBehaviour:
@@ -1865,13 +1866,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 2
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Shots Taken: 0'
+  m_Text: 'Shots Taken: 0 of 5'
 --- !u!222 &1588587533
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -46,6 +46,9 @@ public class Slingshot : MonoBehaviour
 
     void OnMouseDown()
     {
+        if (!MissionDemolition.SHOTS_REMAINING())
+            return;
+        
         aimingMode = true;
         projectile = Instantiate(projectilePrefab) as GameObject;
         projectile.transform.position = launchPos;

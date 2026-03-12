@@ -15,6 +15,7 @@ public class MissionDemolition : MonoBehaviour
     public Vector3 castlePos;
     public GameObject[] castles;
     public GameObject gameOverPanel;
+    public int shotsMax = 5;
 
     [Header("Dynamic")]
     public int level;
@@ -47,6 +48,7 @@ public class MissionDemolition : MonoBehaviour
         castle.transform.position = castlePos;
 
         Goal.goalMet = false;
+        shotsTaken = 0;
 
         UpdateGUI();
 
@@ -58,18 +60,18 @@ public class MissionDemolition : MonoBehaviour
     void UpdateGUI()
     {
         uitLevel.text = "Level: " + (level + 1) + " of " + levelMax;
-        uitShots.text = "Shots Taken: " + shotsTaken;
+        uitShots.text = "Shots Taken: " + shotsTaken + " of " + shotsMax;
     }
 
     void Update()
     {
         UpdateGUI();
 
-        if ((mode == GameMode.playing) && Goal.goalMet)
+        if (mode == GameMode.playing && (Goal.goalMet || shotsTaken >= shotsMax))
         {
             mode = GameMode.levelEnd;
             FollowCam.SWITCH_VIEW(FollowCam.eView.both);
-            Invoke("NextLevel", 2f);
+            Invoke(Goal.goalMet ? "NextLevel" : "StartLevel", 2f);
         }
     }
 
@@ -82,8 +84,6 @@ public class MissionDemolition : MonoBehaviour
             gameOverPanel.SetActive(true);
             mode = GameMode.idle;
             return;
-            // level = 0;
-            // shotsTaken = 0;
         }
 
         StartLevel();
@@ -101,6 +101,11 @@ public class MissionDemolition : MonoBehaviour
     static public void SHOT_FIRED()
     {
         S.shotsTaken++;
+    }
+
+    static public bool SHOTS_REMAINING()
+    {
+        return S.shotsTaken < S.shotsMax;
     }
 
     static public GameObject GET_CASTLE()
