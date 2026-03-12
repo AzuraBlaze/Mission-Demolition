@@ -57,6 +57,7 @@ public class Projectile : MonoBehaviour
         {
             awake = false;
             rigid.Sleep();
+            MissionDemolition.SHOT_SETTLED();
         }
     }
 

@@ -21,6 +21,7 @@ public class MissionDemolition : MonoBehaviour
     public int level;
     public int levelMax;
     public int shotsTaken;
+    public int pendingShots;
     public GameObject castle;
     public GameMode mode = GameMode.idle;
     public string showing = "Show Slingshot";
@@ -49,6 +50,7 @@ public class MissionDemolition : MonoBehaviour
 
         Goal.goalMet = false;
         shotsTaken = 0;
+        pendingShots = 0;
 
         UpdateGUI();
 
@@ -60,19 +62,31 @@ public class MissionDemolition : MonoBehaviour
     void UpdateGUI()
     {
         uitLevel.text = "Level: " + (level + 1) + " of " + levelMax;
-        uitShots.text = "Shots Taken: " + shotsTaken + " of " + shotsMax;
+        uitShots.text = "Shots Taken: " + (shotsTaken + pendingShots) + " of " + shotsMax;
     }
 
     void Update()
     {
         UpdateGUI();
 
-        if (mode == GameMode.playing && (Goal.goalMet || shotsTaken >= shotsMax))
+        if (mode == GameMode.playing && Goal.goalMet)
         {
             mode = GameMode.levelEnd;
             FollowCam.SWITCH_VIEW(FollowCam.eView.both);
-            Invoke(Goal.goalMet ? "NextLevel" : "StartLevel", 2f);
+            Invoke("NextLevel", 2f);
         }
+        else if (mode == GameMode.playing && pendingShots == 0 && shotsTaken >= shotsMax)
+        {
+            mode = GameMode.levelEnd;
+            FollowCam.SWITCH_VIEW(FollowCam.eView.both);
+            Invoke("ShowGameOver", 2f);
+        }
+    }
+
+    void ShowGameOver()
+    {
+        gameOverPanel.SetActive(true);
+        mode = GameMode.idle;
     }
 
     void NextLevel()
@@ -100,12 +114,21 @@ public class MissionDemolition : MonoBehaviour
 
     static public void SHOT_FIRED()
     {
-        S.shotsTaken++;
+        S.pendingShots++;
+    }
+
+    static public void SHOT_SETTLED()
+    {
+        if (S.pendingShots > 0)
+        {
+            S.pendingShots--;
+            S.shotsTaken++;
+        }
     }
 
     static public bool SHOTS_REMAINING()
     {
-        return S.shotsTaken < S.shotsMax;
+        return (S.shotsTaken + S.pendingShots < S.shotsMax);
     }
 
     static public GameObject GET_CASTLE()
