@@ -8,12 +8,17 @@ public class Slingshot : MonoBehaviour
     public GameObject projectilePrefab;
     public float velocityMult = 10f;
     public GameObject projLinePrefab;
+    public LineRenderer rubberBand;
+    public Transform leftFork;
+    public Transform rightFork;
+    // public AudioClip snapSound;
 
-    [Header("Dynmaic")]
+    [Header("Dynamic")]
     public GameObject launchPoint;
     public Vector3 launchPos;
     public GameObject projectile;
     public bool aimingMode;
+    // private AudioSource audioSource;
 
     void Awake()
     {
@@ -21,6 +26,11 @@ public class Slingshot : MonoBehaviour
         launchPoint = launchPointTrans.gameObject;
         launchPoint.SetActive(false);
         launchPos = launchPointTrans.position;
+        
+        if (rubberBand != null)
+            rubberBand.enabled = false;
+        
+        // audioSource = GetComponent<AudioSource>();
     }
 
     void OnMouseEnter()
@@ -44,7 +54,12 @@ public class Slingshot : MonoBehaviour
     void Update()
     {
         if (!aimingMode)
+        {
+            if (rubberBand != null)
+                rubberBand.enabled = false;
+            
             return;
+        }
         
         Vector3 mousePos2D = Input.mousePosition;
         mousePos2D.z = -Camera.main.transform.position.z;
@@ -61,9 +76,22 @@ public class Slingshot : MonoBehaviour
         Vector3 projPos = launchPos + mouseDelta;
         projectile.transform.position = projPos;
 
+        if (rubberBand != null && leftFork != null && rightFork != null)
+        {
+            rubberBand.enabled = true;
+            rubberBand.positionCount = 3;
+            rubberBand.SetPosition(0, leftFork.position);
+            rubberBand.SetPosition(1, projPos);
+            rubberBand.SetPosition(2, rightFork.position);
+        }
+
         if (Input.GetMouseButtonUp(0))
         {
             aimingMode = false;
+            if (rubberBand != null)
+                rubberBand.enabled = false;
+            
+            // audioSource.PlayOneShot(snapSound);
             
             Rigidbody projRB = projectile.GetComponent<Rigidbody>();
             projRB.isKinematic = false;
