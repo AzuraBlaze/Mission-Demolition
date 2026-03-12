@@ -14,6 +14,7 @@ public class MissionDemolition : MonoBehaviour
     public Text uitShots;
     public Vector3 castlePos;
     public GameObject[] castles;
+    public GameObject gameOverPanel;
 
     [Header("Dynamic")]
     public int level;
@@ -78,10 +79,22 @@ public class MissionDemolition : MonoBehaviour
         
         if (level == levelMax)
         {
-            level = 0;
-            shotsTaken = 0;
+            gameOverPanel.SetActive(true);
+            mode = GameMode.idle;
+            return;
+            // level = 0;
+            // shotsTaken = 0;
         }
 
+        StartLevel();
+    }
+
+    public void PlayAgain()
+    {
+        level = 0;
+        shotsTaken = 0;
+        gameOverPanel.SetActive(false);
+        
         StartLevel();
     }
 
