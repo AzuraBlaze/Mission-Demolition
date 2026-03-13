@@ -1496,9 +1496,9 @@ MonoBehaviour:
   uitShots: {fileID: 1588587532}
   castlePos: {x: 50, y: -9.5, z: 0}
   castles:
-  - {fileID: 3930385434910424856, guid: ea7d09f2ab09b2d958214de6b191f5d8, type: 3}
-  - {fileID: 3930385434910424856, guid: ecbc4f2d8905a280a8b0212862d44cbe, type: 3}
   - {fileID: 3930385434910424856, guid: 1d467025638321f95aa454cfb3b8d9a0, type: 3}
+  - {fileID: 3930385434910424856, guid: ecbc4f2d8905a280a8b0212862d44cbe, type: 3}
+  - {fileID: 3930385434910424856, guid: ea7d09f2ab09b2d958214de6b191f5d8, type: 3}
   - {fileID: 3930385434910424856, guid: b57e5edce720fc93b929a84f4ecd491b, type: 3}
   gameOverPanel: {fileID: 1498690694}
   winPanel: {fileID: 1470072916}
